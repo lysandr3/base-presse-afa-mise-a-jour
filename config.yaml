@@ -1,0 +1,12 @@
+credentials:
+  usernames:
+    bdd_maj_afa:
+      email: bdd_maj
+      name: bdd_maj
+      password: $2b$12$tnfvEoEGuXLOf3XUNydWrOB/ve.bm17QZBOriXAcvmmtFJk06n29q
+cookie:
+  expiry_days: 0
+  key: random_signature_key
+  name: bp_afa_authentification
+preauthorized:
+  emails:
