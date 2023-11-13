@@ -43,6 +43,7 @@ def run():
       response = s3.get_object(Bucket='base-presse-afa', Key='bp.csv')
       df = pd.read_csv(StringIO(response['Body'].read().decode('utf-8')))
       csv_buffer = StringIO() 
+      # Change pd.DataFrame() by df when you'll stop to test it
       pd.concat([db,pd.DataFrame()],ignore_index=True).to_csv(csv_buffer, index=False)
       s3.put_object(Body=csv_buffer.getvalue(), Bucket='base-presse-afa', Key='bp.csv')
       st.success("Base de donnée mise à jour !")
