@@ -36,14 +36,14 @@ def run():
   if uploaded_file is not None:
     temp_file = NamedTemporaryFile(delete=False)
     temp_file.write(uploaded_file.read())
-    db = pdf_to_df(temp_file.name)
+    db = pdf_to_df(temp_file.name).applymap(str.strip)
     st.write(db)
 
     if st.button('Ajouter à la base de donnée ?'):
       response = s3.get_object(Bucket='base-presse-afa', Key='bp.csv')
       df = pd.read_csv(StringIO(response['Body'].read().decode('utf-8')))
-      csv_buffer = StringIO()
-      pd.concat([db,df],ignore_index=True).to_csv(csv_buffer, index=False)
+      csv_buffer = StringIO() 
+      pd.concat([db,pd.DataFrame()],ignore_index=True).to_csv(csv_buffer, index=False)
       s3.put_object(Body=csv_buffer.getvalue(), Bucket='base-presse-afa', Key='bp.csv')
       st.success("Base de donnée mise à jour !")
 
