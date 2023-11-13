@@ -30,7 +30,7 @@ def run():
     page_icon="",
   )
   st.header("Base Presse AFA - Mise à jour :")
-  s3 = boto3.client('s3', aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'), aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY'))
+  s3 = boto3.client('s3', aws_access_key_id=st.secrets['AWS_ACCESS_KEY_ID'], aws_secret_access_key=st.secrets['AWS_SECRET_ACCESS_KEY'])
 
   uploaded_file = st.file_uploader("Veuillez importer la dernière copie numérique transmise", type=["pdf"])
   if uploaded_file is not None:
@@ -38,7 +38,6 @@ def run():
     temp_file.write(uploaded_file.read())
     db = pdf_to_df(temp_file.name)
     st.write(db)
-    st.write(st.secrets['AWS_ACCESS_KEY_ID'])
 
     if st.button('Ajouter à la base de donnée ?'):
       response = s3.get_object(Bucket='base-presse-afa', Key='bp.csv')
