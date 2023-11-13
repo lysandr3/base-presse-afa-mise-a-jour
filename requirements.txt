@@ -3,3 +3,5 @@ numpy
 pandas
 pydeck
 streamlit
+boto3
+pdfminer.six
