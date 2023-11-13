@@ -38,6 +38,7 @@ def run():
     temp_file.write(uploaded_file.read())
     db = pdf_to_df(temp_file.name)
     st.write(db)
+    st.write(st.secrets['AWS_ACCESS_KEY_ID'])
 
     if st.button('Ajouter à la base de donnée ?'):
       response = s3.get_object(Bucket='base-presse-afa', Key='bp.csv')
